@@ -41,16 +41,28 @@
 
 ## Spec / Handoff
 
-- Keep `ai/spec.md` updated during multi-step work.
-- Before running `/compact`, update `ai/spec.md`.
-- After any meaningful code change, update `ai/spec.md` with:
-  - current goal,
-  - decisions made,
-  - files changed,
-  - tests run or still needed,
-  - risks,
-  - next step.
-- Do not rely only on conversation history for architectural decisions.
+Use `ai/spec.md` as a durable handoff document only for multi-step implementation work.
+
+Update `ai/spec.md` only when:
+- the user explicitly asks for a spec/handoff update,
+- the task is a multi-step implementation or architectural change,
+- the session is about to be compacted with `/compact`,
+- the user asks for a durable summary of decisions, risks, files changed, tests and next steps.
+
+Do not update `ai/spec.md` during:
+- read-only analysis,
+- code review,
+- GitHub PR review,
+- commit-only workflows,
+- branch creation,
+- push/PR creation workflows,
+- simple one-file edits,
+- tasks where the user explicitly limits allowed files.
+
+When committing:
+- do not add `ai/spec.md` unless explicitly requested,
+- do not modify `ai/spec.md` just to satisfy a commit or PR workflow,
+- respect the user-provided list of allowed files.
 
 ## Codex Subagent Strategy
 
@@ -70,3 +82,16 @@ Rules:
 
 Example prompt:
 "Spawn reviewer-agent and test-agent as separate subagents. reviewer-agent should review the changed code read-only. test-agent should inspect existing tests and propose or add missing tests only in test files. Wait for both results and summarize merge-blocking risks."
+
+## Project skills
+
+Available project skills:
+
+- `$frontend-design` — use for frontend UI work, layout, styling, visual states and component polish.
+- `$review` — use for code review focused on correctness, regressions, security and missing tests.
+- `$review-docs` — use for reviewing documentation, README, handoff specs and developer-facing notes.
+- `$test-unit` — use for planning and writing unit/component tests.
+
+Prefer explicit skill invocation for important workflows.
+Do not use design/Figma skills for backend-only or API-only tasks.
+Do not perform GitHub write actions unless the user explicitly confirms.
