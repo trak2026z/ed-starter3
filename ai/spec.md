@@ -76,3 +76,44 @@ Sprawdzić aktualny stan zmian i istniejący setup testowy oraz dodać brakując
 ### Następny krok
 
 Przed merge uruchomić `npm run typecheck` i `npm run lint`. Jeśli zespół chce testy regresji, najpierw zatwierdzić dodanie frameworka testowego, np. Vitest dla logiki store/selectorów i opcjonalnie Playwright dla ścieżek UI.
+
+## UI redesign update — 2026-04-29
+
+### Cel bieżącej pracy
+
+Znacząco poprawić ekran listy lotów pod kątem UX, czytelności, hierarchii informacji, responsywności i dostępności, bez zmian w API, store ani modelu danych lotów.
+
+### Decyzje projektowe
+
+- Zachowano estetykę operacyjnego FIDS, ale podniesiono kontrast, rytm siatki i wagę najważniejszych informacji.
+- Dodano panel podsumowania: liczba widocznych lotów, opóźnione, boarding i aktywny zakres filtrów.
+- Dodano sygnał "Next boardable" wyliczany z aktualnie widocznych lotów, bez utrwalania nowych danych.
+- Filtry dostały jawne etykiety, większe pola i widoczne focus states.
+- Desktop używa gęstej tabeli porównawczej, a mobile osobnych kart z czasem, kierunkiem, terminalem, bramką i statusem.
+- Statusy dostały bardziej czytelne badge z kropką statusu i mocniejsze rozróżnienie kolorystyczne.
+- Poprawiono animację zmiany statusu w `FlightRow`, usuwając `setState` wykonywany podczas renderu.
+- Dodano `prefers-reduced-motion` w globalnych stylach.
+
+### Zmienione pliki
+
+- `components/fids/FlightBoard.tsx` — przebudowany header, podsumowania, filtry, responsive layout listy i empty state.
+- `components/fids/FlightRow.tsx` — osobny układ mobile/desktop, lepsza hierarchia informacji i poprawiona animacja statusu.
+- `components/fids/StatusBadge.tsx` — nowe warianty wizualne statusów.
+- `components/fids/LiveClock.tsx` — dopasowany wygląd zegara do nowego headera.
+- `app/globals.css` — odświeżone tokeny kolorów, subtelna tekstura tła i reduced motion.
+- `next.config.ts` — jawny `turbopack.root` dla tego projektu.
+- `package.json` — `npm run dev` uruchamia Next w trybie webpack, bo Turbopack dev w tym workspace rozwiązywał `tailwindcss` względem katalogu nadrzędnego.
+- `ai/spec.md` — aktualny handoff tej zmiany.
+
+### Testy / quality gates
+
+- `npm run typecheck` — passed.
+- `npm run lint` — passed z istniejącym ostrzeżeniem w `app/admin/page.tsx:56` dotyczącym użycia `<a>` zamiast `next/link`.
+- `npm run build` — passed po uruchomieniu poza sandboxem, wymagane przez lokalne ograniczenia Turbopack/PostCSS dotyczące procesów pomocniczych.
+- `npm run dev` — starts at `http://localhost:3000` using webpack mode; `curl -I http://127.0.0.1:3000` returned `200 OK`.
+
+### Ryzyka
+
+- Nie dodano nowych zależności ani testów automatycznych.
+- Ekran nadal nie ma danych cenowych/czasu podróży, więc UX wyboru najlepszej oferty opiera się na dostępnych polach: czasie, statusie, terminalu, bramce, linii i kierunku.
+- Playwright MCP zwrócił błąd zamkniętego kontekstu przeglądarki, więc automatyczny screenshot nie został wykonany w tej sesji.

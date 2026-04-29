@@ -3,15 +3,16 @@ import { cn } from '@/lib/utils';
 import type { FlightStatus } from '@/types';
 
 const statusBadgeVariants = cva(
-  'inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold uppercase tracking-widest rounded-sm min-w-[90px]',
+  'inline-flex min-w-[104px] items-center justify-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] shadow-sm',
   {
     variants: {
       status: {
-        'On Time': 'bg-emerald-900 text-emerald-300 border border-emerald-700',
-        Boarding: 'bg-amber-900 text-amber-300 border border-amber-600 animate-pulse',
-        Departed: 'bg-zinc-800 text-zinc-500 border border-zinc-700',
-        Delayed: 'bg-orange-900 text-orange-300 border border-orange-700',
-        Cancelled: 'bg-red-950 text-red-400 border border-red-800',
+        'On Time': 'border-emerald-400/35 bg-emerald-400/10 text-emerald-200',
+        Boarding:
+          'border-amber-300/60 bg-amber-300/15 text-amber-100 shadow-amber-300/10 animate-pulse',
+        Departed: 'border-zinc-500/25 bg-zinc-700/20 text-zinc-400',
+        Delayed: 'border-orange-300/45 bg-orange-400/10 text-orange-100',
+        Cancelled: 'border-red-400/45 bg-red-500/10 text-red-100',
       },
     },
     defaultVariants: {
@@ -26,5 +27,10 @@ interface StatusBadgeProps extends VariantProps<typeof statusBadgeVariants> {
 }
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
-  return <span className={cn(statusBadgeVariants({ status }), className)}>{status}</span>;
+  return (
+    <span className={cn(statusBadgeVariants({ status }), className)}>
+      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
+      {status}
+    </span>
+  );
 }

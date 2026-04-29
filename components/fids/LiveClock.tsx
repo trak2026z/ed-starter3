@@ -20,9 +20,11 @@ export function LiveClock() {
   }, []);
 
   return (
-    <div className="flex items-center gap-2 font-mono text-2xl font-bold text-amber-400">
-      <span className="text-amber-600 text-sm uppercase tracking-widest">Local</span>
-      <span>{time || '--:--:--'}</span>
+    <div className="flex items-center justify-between gap-4 rounded-[8px] border border-amber-300/25 bg-amber-300/10 px-4 py-3 font-mono text-2xl font-black text-amber-200 sm:min-w-48">
+      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-board-muted">
+        Local
+      </span>
+      <span className="tabular-nums">{time || '--:--:--'}</span>
     </div>
   );
 }
