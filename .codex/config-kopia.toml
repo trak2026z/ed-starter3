@@ -1,0 +1,100 @@
+# .codex/config.toml
+# Lokalna konfiguracja Codex dla projektu ed-starter.
+#
+# Docelowa lokalizacja:
+# /Users/tomaszrak/5/ed-starter1/.codex/config.toml
+#
+# Ten plik możesz commitować do repozytorium, o ile nie dodasz tu sekretów,
+# prywatnych tokenów, lokalnych ścieżek użytkownika ani ustawień specyficznych
+# tylko dla Twojej maszyny.
+
+################################################################################
+# Project behavior
+################################################################################
+
+# Model, MCP, pluginy, status line i preferencje UI dziedziczymy z:
+# ~/.codex/config.toml
+#
+# Ten plik ustawia tylko zachowanie Codex dla tego konkretnego repo.
+
+# Normalna praca w projekcie: Codex może edytować pliki w workspace.
+sandbox_mode = "workspace-write"
+
+# Codex pyta o zgodę, gdy potrzebuje większych uprawnień albo wyjścia poza sandbox.
+approval_policy = "on-request"
+
+# Dla codziennej implementacji w ed-starter.
+model_reasoning_effort = "medium"
+model_verbosity = "medium"
+
+# Planowanie zmian powinno być dokładniejsze niż sama implementacja.
+plan_mode_reasoning_effort = "high"
+
+################################################################################
+# Context management
+################################################################################
+
+# ed-starter jest małym projektem, więc lepiej wcześniej robić /compact
+# albo startować nową sesję, zamiast pompować bardzo długą historię.
+model_auto_compact_token_limit = 64000
+
+# Ogranicza ilość outputu z komend, który trafia do kontekstu.
+# Przy npm run lint / typecheck / build output potrafi szybko zapchać kontekst.
+tool_output_token_limit = 12000
+
+# Codex ma szukać AGENTS.md jako głównego pliku instrukcji projektu.
+# To jest zgodne z podejściem z kursu dla Codex CLI.
+project_doc_fallback_filenames = ["AGENTS.md"]
+
+################################################################################
+# Web / network policy
+################################################################################
+
+# Web search Codex przez cache, bez pełnego dostępu sieciowego dla komend shellowych.
+web_search = "cached"
+
+# Domyślnie shell w sandboxie nie ma dostępu do sieci.
+# npm install / npx / pobieranie paczek uruchamiaj świadomie przez profil ed-setup.
+[sandbox_workspace_write]
+network_access = false
+exclude_slash_tmp = false
+exclude_tmpdir_env_var = false
+
+################################################################################
+# Project-local profiles
+################################################################################
+
+# Tryb implementacyjny dla ed-starter.
+# Użycie:
+# codex --profile ed-dev
+[profiles.ed-dev]
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "high"
+web_search = "cached"
+
+# Tryb review / analizy bez edycji plików.
+# Użycie:
+# codex --profile ed-review
+[profiles.ed-review]
+sandbox_mode = "read-only"
+approval_policy = "on-request"
+model_reasoning_effort = "high"
+plan_mode_reasoning_effort = "high"
+web_search = "cached"
+
+# Tryb setupu, gdy świadomie potrzebujesz sieci, np. npm install albo npx.
+# Użycie:
+# codex --profile ed-setup
+[profiles.ed-setup]
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "high"
+web_search = "cached"
+
+[profiles.ed-setup.sandbox_workspace_write]
+network_access = true
+exclude_slash_tmp = false
+exclude_tmpdir_env_var = false

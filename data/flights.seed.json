@@ -1,0 +1,207 @@
+[
+  {
+    "id": "fl_8k2m",
+    "flightNumber": "LO 261",
+    "airline": "LOT",
+    "destination": "London Heathrow",
+    "departureTime": "06:05",
+    "terminal": "T1",
+    "gate": "A1",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_r4nq",
+    "flightNumber": "FR 8421",
+    "airline": "Ryanair",
+    "destination": "Dublin",
+    "departureTime": "06:35",
+    "terminal": "T2",
+    "gate": "B11",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_3vwp",
+    "flightNumber": "W6 3304",
+    "airline": "Wizz Air",
+    "destination": "Budapest",
+    "departureTime": "07:40",
+    "terminal": "T2",
+    "gate": "B14",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_j7xs",
+    "flightNumber": "LH 1609",
+    "airline": "Lufthansa",
+    "destination": "Frankfurt",
+    "departureTime": "07:40",
+    "terminal": "T1",
+    "gate": "A5",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_dn5a",
+    "flightNumber": "KL 1374",
+    "airline": "KLM",
+    "destination": "Amsterdam",
+    "departureTime": "08:10",
+    "terminal": "T1",
+    "gate": "A8",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_t9ub",
+    "flightNumber": "LO 277",
+    "airline": "LOT",
+    "destination": "Paris CDG",
+    "departureTime": "08:50",
+    "terminal": "T1",
+    "gate": "A3",
+    "status": "Delayed",
+    "delayMinutes": 20
+  },
+  {
+    "id": "fl_2cwf",
+    "flightNumber": "EK 235",
+    "airline": "Emirates",
+    "destination": "Dubai",
+    "departureTime": "09:25",
+    "terminal": "T2",
+    "gate": "B22",
+    "status": "Delayed",
+    "delayMinutes": 45
+  },
+  {
+    "id": "fl_mp6h",
+    "flightNumber": "DL 69",
+    "airline": "Delta",
+    "destination": "New York JFK",
+    "departureTime": "10:10",
+    "terminal": "T1",
+    "gate": "A12",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_w1kg",
+    "flightNumber": "FR 1234",
+    "airline": "Ryanair",
+    "destination": "Barcelona",
+    "departureTime": "10:10",
+    "terminal": "T2",
+    "gate": "B7",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_6eyz",
+    "flightNumber": "W6 5501",
+    "airline": "Wizz Air",
+    "destination": "London Luton",
+    "departureTime": "10:55",
+    "terminal": "T2",
+    "gate": "B9",
+    "status": "Delayed",
+    "delayMinutes": 15
+  },
+  {
+    "id": "fl_qb4r",
+    "flightNumber": "LO 133",
+    "airline": "LOT",
+    "destination": "New York JFK",
+    "departureTime": "11:30",
+    "terminal": "T1",
+    "gate": "A15",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_hx8v",
+    "flightNumber": "LH 1611",
+    "airline": "Lufthansa",
+    "destination": "Munich",
+    "departureTime": "12:20",
+    "terminal": "T1",
+    "gate": "A6",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_s3na",
+    "flightNumber": "FR 4501",
+    "airline": "Ryanair",
+    "destination": "Rome Ciampino",
+    "departureTime": "13:05",
+    "terminal": "T2",
+    "gate": "B5",
+    "status": "Delayed",
+    "delayMinutes": 30
+  },
+  {
+    "id": "fl_yk7d",
+    "flightNumber": "KL 1376",
+    "airline": "KLM",
+    "destination": "Amsterdam",
+    "departureTime": "13:05",
+    "terminal": "T1",
+    "gate": "A9",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_c2mw",
+    "flightNumber": "EK 237",
+    "airline": "Emirates",
+    "destination": "Dubai",
+    "departureTime": "14:40",
+    "terminal": "T2",
+    "gate": "B20",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_p5tf",
+    "flightNumber": "W6 2205",
+    "airline": "Wizz Air",
+    "destination": "Milan Bergamo",
+    "departureTime": "15:15",
+    "terminal": "T2",
+    "gate": "B3",
+    "status": "Cancelled"
+  },
+  {
+    "id": "fl_a9gj",
+    "flightNumber": "LO 391",
+    "airline": "LOT",
+    "destination": "Chicago O'Hare",
+    "departureTime": "15:50",
+    "terminal": "T1",
+    "gate": "A18",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_v4le",
+    "flightNumber": "DL 267",
+    "airline": "Delta",
+    "destination": "Atlanta",
+    "departureTime": "16:25",
+    "terminal": "T1",
+    "gate": "A20",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_n8qc",
+    "flightNumber": "FR 7801",
+    "airline": "Ryanair",
+    "destination": "Edinburgh",
+    "departureTime": "17:10",
+    "terminal": "T2",
+    "gate": "B15",
+    "status": "On Time"
+  },
+  {
+    "id": "fl_g1rb",
+    "flightNumber": "LH 1615",
+    "airline": "Lufthansa",
+    "destination": "Frankfurt",
+    "departureTime": "18:00",
+    "terminal": "T1",
+    "gate": "A7",
+    "status": "Delayed",
+    "delayMinutes": 10
+  }
+]
