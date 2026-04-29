@@ -4,15 +4,15 @@ Codex Stop hook: ordered quality gate.
 
 Flow:
 1. Avoid infinite Stop-hook loops.
-2. Run .codex/hooks/ensure-spec-updated.py if present.
+2. Optionally run .codex/hooks/ensure-spec-updated.py only when
+   CODEX_RUN_SPEC_UPDATE=1.
 3. Run npm run typecheck if package.json has "typecheck".
 4. Run unit tests if package.json has one of:
    - test:unit
    - unit
    - test
 
-Override test command with:
-CODEX_UNIT_TEST_SCRIPT="npm run test:unit"
+By default this hook must not modify working tree files.
 """
 
 from __future__ import annotations
@@ -245,10 +245,17 @@ def main() -> int:
 
     repo_root = repo_root_from(payload)
 
-    ensure_decision = run_existing_ensure_spec_hook(repo_root, payload)
-    if ensure_decision is not None:
-        emit(ensure_decision)
-        return 0
+    run_spec_update = os.environ.get("CODEX_RUN_SPEC_UPDATE", "").lower() in {
+        "1",
+        "true",
+        "yes",
+    }
+
+    if run_spec_update:
+        ensure_decision = run_existing_ensure_spec_hook(repo_root, payload)
+        if ensure_decision is not None:
+            emit(ensure_decision)
+            return 0
 
     scripts = load_package_scripts(repo_root)
 
@@ -270,7 +277,8 @@ def main() -> int:
             "continue": True,
             "systemMessage": (
                 "Stop quality gate passed. Typecheck was handled if configured. "
-                "No unit test script found in package.json: expected one of test:unit, unit, test."
+                "No unit test script found in package.json: expected one of test:unit, unit, test. "
+                "Spec update is disabled by default. Set CODEX_RUN_SPEC_UPDATE=1 to enable it."
             ),
         })
         return 0
@@ -288,7 +296,8 @@ def main() -> int:
     emit({
         "continue": True,
         "systemMessage": (
-            "Stop quality gate passed: configured typecheck and unit tests succeeded."
+            "Stop quality gate passed: configured typecheck and unit tests succeeded. "
+            "Spec update is disabled by default. Set CODEX_RUN_SPEC_UPDATE=1 to enable it."
         ),
     })
     return 0
